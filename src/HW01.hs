@@ -26,13 +26,13 @@ dropLastDigit2 n = fst (divMod n 10)
 toRevDigits :: Integer -> [Integer]
 toRevDigits n
   | n <= 0    = []
-  | otherwise = (lastDigit n) : (toRevDigits (dropLastDigit n))
+  | otherwise = lastDigit n : toRevDigits (dropLastDigit n)
 
 -- added bonus:
 
 -- Function composition
-toDigits :: Integer -> [Integer]
-toDigits n = (reverse . toRevDigits) n
+-- toDigits :: Integer -> [Integer]
+-- toDigits n = (reverse . toRevDigits) n
 
 -- Function composition - Pointfree!
 toDigits' :: Integer -> [Integer]
@@ -43,21 +43,22 @@ toDigits' = reverse . toRevDigits
 -- Double every second number in a list starting on the left.
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther []       = []
-doubleEveryOther (x:[])   = [x]
+doubleEveryOther [x]      = [x]
 doubleEveryOther (x:y:zs) = x : (y * 2) : doubleEveryOther zs
 
 -- Exercise 4 -----------------------------------------
 
 -- Calculate the sum of all the digits in every Integer.
 sumDigits :: [Integer] -> Integer
-sumDigits [] = 0
-sumDigits (x:xs) = (dropLastDigit x) + (lastDigit x) + sumDigits xs
+-- sumDigits [] = 0
+-- sumDigits (x:xs) = dropLastDigit x + lastDigit x + sumDigits xs
+sumDigits = foldr (\ x -> (+) (dropLastDigit x + lastDigit x)) 0
 
 -- Exercise 5 -----------------------------------------
 
 -- Validate a credit card number using the above functions.
 luhn :: Integer -> Bool
-luhn n = (mod (sumDigits (doubleEveryOther (toRevDigits n))) 10) == 0
+luhn n = mod (sumDigits (doubleEveryOther (toRevDigits n))) 10 == 0
 -- 4662110665499438 True
 -- 645937 True
 -- 1859 True
