@@ -31,8 +31,8 @@ toRevDigits n
 -- added bonus:
 
 -- Function composition
--- toDigits :: Integer -> [Integer]
--- toDigits n = (reverse . toRevDigits) n
+toDigits :: Integer -> [Integer]
+toDigits n = (reverse . toRevDigits) n
 
 -- Function composition - Pointfree!
 toDigits' :: Integer -> [Integer]
@@ -43,16 +43,15 @@ toDigits' = reverse . toRevDigits
 -- Double every second number in a list starting on the left.
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther []       = []
-doubleEveryOther [x]      = [x]
+doubleEveryOther (x:[])      = [x]
 doubleEveryOther (x:y:zs) = x : (y * 2) : doubleEveryOther zs
 
 -- Exercise 4 -----------------------------------------
 
 -- Calculate the sum of all the digits in every Integer.
 sumDigits :: [Integer] -> Integer
--- sumDigits [] = 0
--- sumDigits (x:xs) = dropLastDigit x + lastDigit x + sumDigits xs
-sumDigits = foldr (\ x -> (+) (dropLastDigit x + lastDigit x)) 0
+sumDigits [] = 0
+sumDigits (x:xs) = dropLastDigit x + lastDigit x + sumDigits xs
 
 -- Exercise 5 -----------------------------------------
 
