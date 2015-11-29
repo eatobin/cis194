@@ -415,7 +415,7 @@ As a more complex (but more contrived) example:
 
 > foo :: Integer -> Integer
 > foo 0 = 16
-> foo 1 
+> foo 1
 >   | "Haskell" > "C++" = 3
 >   | otherwise         = 4
 > foo n
@@ -430,7 +430,7 @@ to abstract out the test of evenness used in defining `hailstone`. A
 first attempt is shown below:
 
 > isEven :: Integer -> Bool
-> isEven n 
+> isEven n
 >   | n `mod` 2 == 0 = True
 >   | otherwise      = False
 
