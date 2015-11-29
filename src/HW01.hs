@@ -11,15 +11,6 @@ lastDigit n = mod n 10
 dropLastDigit :: Integer -> Integer
 dropLastDigit n = div n 10
 
--- OR!
-
--- Using divMod
-lastDigit2 :: Integer -> Integer
-lastDigit2 n = snd (divMod n 10)
-
-dropLastDigit2 :: Integer -> Integer
-dropLastDigit2 n = fst (divMod n 10)
-
 -- Exercise 2 -----------------------------------------
 
 -- Produce a list of the reversed digits of a number
@@ -27,16 +18,6 @@ toRevDigits :: Integer -> [Integer]
 toRevDigits n
   | n <= 0    = []
   | otherwise = lastDigit n : toRevDigits (dropLastDigit n)
-
--- added bonus:
-
--- Function composition
-toDigits :: Integer -> [Integer]
-toDigits n = (reverse . toRevDigits) n
-
--- Function composition - Pointfree!
-toDigits' :: Integer -> [Integer]
-toDigits' = reverse . toRevDigits
 
 -- Exercise 3 -----------------------------------------
 
