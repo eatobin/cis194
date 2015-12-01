@@ -29,7 +29,7 @@ frob str
 
 intListSum :: [Int] -> Int
 intListSum [] = 0
-intListSum (x:xs) = x + intListSum xs 
+intListSum (x:xs) = x + intListSum xs
 
 sumTo20 :: [Int] -> Int
 sumTo20 nums = go 0 nums   -- the acc. starts at 0
@@ -67,9 +67,22 @@ mapIntList f (x:xs) = f x : mapIntList f xs
 --mapIntList abs  exampleList
 --mapIntList (^2) exampleList
 
+-- My example
+eatMap :: [Integer]
+eatMap = map (\x -> x*10) (map (\x -> x+1) [1,2,3])
+
+-- or
+eatMap' :: [Integer] -> [Integer]
+eatMap' xs = map mee xs
+  where mee x = x + 1
+
+-- or
+eatMap'' :: [Integer] -> [Integer]
+eatMap'' = map (+1)
+
 keepOnlyPositive :: [Int] -> [Int]
 keepOnlyPositive [] = []
-keepOnlyPositive (x:xs) 
+keepOnlyPositive (x:xs)
   | x > 0     = x : keepOnlyPositive xs
   | otherwise = keepOnlyPositive xs
 
