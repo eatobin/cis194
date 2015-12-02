@@ -80,6 +80,22 @@ eatMap' xs = map mee xs
 eatMap'' :: [Integer] -> [Integer]
 eatMap'' = map (+1)
 
+reverse' :: [a] -> [a]
+reverse' xs = foldl (\acc x -> x : acc) [] xs
+
+myFoldR :: [Integer]
+myFoldR = foldr (\x acc -> acc ++ [x]) [60] [66,99,44]
+-- [60,44,99,66]
+
+myFoldL :: [Integer]
+myFoldL = foldl (\acc x -> x : acc) [60] [66,99,44]
+-- [44,99,66,60]
+
+myFoldL' :: [Integer]
+myFoldL' = foldl (\acc x -> acc ++ [x]) [60] [66,99,44]
+-- [60,66,99,44]
+
+
 keepOnlyPositive :: [Int] -> [Int]
 keepOnlyPositive [] = []
 keepOnlyPositive (x:xs)
