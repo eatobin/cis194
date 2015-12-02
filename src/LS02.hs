@@ -83,6 +83,9 @@ eatMap'' = map (+1)
 reverse' :: [a] -> [a]
 reverse' xs = foldl (\acc x -> x : acc) [] xs
 
+-- foldl :: (o -> i -> o) -> o -> [i] -> o
+-- foldr :: (i -> o -> o) -> o -> [i] -> o
+
 myFoldR :: [Integer]
 myFoldR = foldr (\x acc -> acc ++ [x]) [60] [66,99,44]
 -- [60,44,99,66]
