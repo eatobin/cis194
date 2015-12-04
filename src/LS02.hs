@@ -90,6 +90,10 @@ myFoldR :: [Integer]
 myFoldR = foldr (\x acc -> acc ++ [x]) [60] [66,99,44]
 -- [60,44,99,66]
 
+myFoldR' :: [Integer]
+myFoldR' = foldr (:) [] [66,99,44]
+-- [66,99,44]
+
 myFoldL :: [Integer]
 myFoldL = foldl (\acc x -> x : acc) [60] [66,99,44]
 -- [44,99,66,60]
@@ -98,6 +102,9 @@ myFoldL' :: [Integer]
 myFoldL' = foldl (\acc x -> acc ++ [x]) [60] [66,99,44]
 -- [60,66,99,44]
 
+myFoldL'' :: [Integer]
+myFoldL'' = foldl (++) [66,99,44] []
+-- [66,99,44]
 
 keepOnlyPositive :: [Int] -> [Int]
 keepOnlyPositive [] = []
