@@ -83,28 +83,60 @@ eatMap'' = map (+1)
 reverse' :: [a] -> [a]
 reverse' xs = foldl (\acc x -> x : acc) [] xs
 
+
 -- foldl :: (o -> i -> o) -> o -> [i] -> o
 -- foldr :: (i -> o -> o) -> o -> [i] -> o
 
 myFoldR :: [Integer]
-myFoldR = foldr (\x acc -> acc ++ [x]) [60] [66,99,44]
--- [60,44,99,66]
+myFoldR = foldr (\x acc -> acc ++ [x]) [60,80] [66,99,44]
+-- [60,80,44,99,66]
 
 myFoldR' :: [Integer]
-myFoldR' = foldr (:) [] [66,99,44]
+myFoldR' = foldr (\x acc -> acc ++ [x]) [66,99,44] [60,80]
+-- [66,99,44,80,60]
+
+myFoldR'' :: [Integer]
+myFoldR'' = foldr (\x acc -> x : acc) [60,80] [66,99,44]
+-- [66,99,44,60,80]
+
+myFoldR''' :: [Integer]
+myFoldR''' = foldr (\x acc -> x : acc) [66,99,44] [60,80]
+-- [60,80,66,99,44]
+
+myFoldRa :: [Integer]
+myFoldRa = foldr (:) [60,80] [66,99,44]
+-- [66,99,44,60,80]
+
+myFoldRb :: [Integer]
+myFoldRb = foldr (++) [66,99,44] []
 -- [66,99,44]
+
+-- ******
 
 myFoldL :: [Integer]
-myFoldL = foldl (\acc x -> x : acc) [60] [66,99,44]
--- [44,99,66,60]
+myFoldL = foldl (\acc x -> acc ++ [x]) [60,80] [66,99,44]
+-- [60,80,66,99,44]
 
 myFoldL' :: [Integer]
-myFoldL' = foldl (\acc x -> acc ++ [x]) [60] [66,99,44]
--- [60,66,99,44]
+myFoldL' = foldl (\acc x -> acc ++ [x]) [66,99,44] [60,80]
+-- [66,99,44,60,80]
 
 myFoldL'' :: [Integer]
-myFoldL'' = foldl (++) [66,99,44] []
+myFoldL'' = foldl (\acc x -> x : acc) [60,80] [66,99,44]
+-- [44,99,66,60,80]
+
+myFoldL''' :: [Integer]
+myFoldL''' = foldl (\acc x -> x : acc) [66,99,44] [60,80]
+-- [80,60,66,99,44]
+
+-- myFoldLa :: [Integer]
+-- myFoldLa = foldl (:) [60,80] [66,99,44]
+-- Can't be done!
+
+myFoldLb :: [Integer]
+myFoldLb = foldl (++) [66,99,44] []
 -- [66,99,44]
+
 
 keepOnlyPositive :: [Int] -> [Int]
 keepOnlyPositive [] = []
