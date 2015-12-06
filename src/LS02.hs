@@ -91,52 +91,26 @@ myFoldR :: [Integer]
 myFoldR = foldr (\x acc -> acc ++ [x]) [60,80] [66,99,44]
 -- [60,80,44,99,66]
 
-myFoldR' :: [Integer]
-myFoldR' = foldr (\x acc -> acc ++ [x]) [66,99,44] [60,80]
--- [66,99,44,80,60]
-
-myFoldR'' :: [Integer]
-myFoldR'' = foldr (\x acc -> x : acc) [60,80] [66,99,44]
--- [66,99,44,60,80]
-
-myFoldR''' :: [Integer]
-myFoldR''' = foldr (\x acc -> x : acc) [66,99,44] [60,80]
--- [60,80,66,99,44]
-
-myFoldRa :: [Integer]
-myFoldRa = foldr (:) [60,80] [66,99,44]
--- [66,99,44,60,80]
-
-myFoldRb :: [Integer]
-myFoldRb = foldr (++) [66,99,44] []
--- [66,99,44]
-
--- ******
-
 myFoldL :: [Integer]
 myFoldL = foldl (\acc x -> acc ++ [x]) [60,80] [66,99,44]
 -- [60,80,66,99,44]
 
-myFoldL' :: [Integer]
-myFoldL' = foldl (\acc x -> acc ++ [x]) [66,99,44] [60,80]
+myFoldR'' :: [Integer]
+myFoldR'' = foldr (\x acc -> x : acc) [60,80] [66,99,44]
 -- [66,99,44,60,80]
 
 myFoldL'' :: [Integer]
 myFoldL'' = foldl (\acc x -> x : acc) [60,80] [66,99,44]
 -- [44,99,66,60,80]
 
-myFoldL''' :: [Integer]
-myFoldL''' = foldl (\acc x -> x : acc) [66,99,44] [60,80]
--- [80,60,66,99,44]
+myFoldRa :: [Integer]
+myFoldRa = foldr (:) [60,80] [66,99,44]
+-- [66,99,44,60,80]
 
 -- myFoldLa :: [Integer]
 -- myFoldLa = foldl (:) [60,80] [66,99,44]
 -- Can't be done!
-
-myFoldLb :: [Integer]
-myFoldLb = foldl (++) [66,99,44] []
--- [66,99,44]
-
+-- ******
 
 keepOnlyPositive :: [Int] -> [Int]
 keepOnlyPositive [] = []
@@ -157,15 +131,18 @@ filterIntList p (x:xs)
   | otherwise = filterIntList p xs
 -- filterIntList (\x -> x > 2) [1,2,3,4] == [3,4]
 
-myFold :: (a -> b -> b) -> b  -> [a] -> b
-myFold _ z []     = z
-myFold f z (x:xs) = f x (myFold f z xs)
--- myFold (+) 0 [1,2,3] == 6
--- myFold (*) 1 [1,22,3] == 66
+-- if the list is empty, the result is the initial value z; else
+-- apply f to the first element and the result of folding the rest
+wikiFoldr :: (a -> b -> b) -> b -> [a] -> b
+wikiFoldr _ z []     = z
+wikiFoldr f z (x:xs) = f x (wikiFoldr f z xs)
+-- wikiFoldr (+) 0 [8,8] -> 16
+-- wikiFoldr (/) 2 [8,12,24,4] -> 8.0
 
--- OR
-
-myFold2 :: (a -> a -> a) -> a  -> [a] -> a
-myFold2 _ z []     = z
-myFold2 f z (x:xs) = f x (myFold2 f z xs)
--- myFold2 (+) 100 [1,2,3,4] == 110
+-- if the list is empty, the result is the initial value; else
+-- we recurse immediately, making the new initial value the result
+-- of combining the old initial value with the first element.
+wikiFoldl :: (b -> a -> b) -> b -> [a] -> b
+wikiFoldl _ z []     = z
+wikiFoldl f z (x:xs) = wikiFoldl f (f z x) xs
+-- wikiFoldl (/) 2 [8,12,24,4] -> 2.1701388888888888e-4
