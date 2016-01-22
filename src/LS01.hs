@@ -6,13 +6,13 @@ ex00 = (*) 4 3
 ex01 :: Double
 ex01 = (/) 20 5
 -- 4.0
-ex02 = (div) 20 5
+ex02 = div 20 5
 -- 4
-ex27 = (mod) 20 5
+ex27 = mod 20 5
 -- 0
-ex28 = (div) 135 10
+ex28 = div 135 10
 -- 13
-ex29 = (mod) 135 10
+ex29 = mod 135 10
 -- 5
 ex03 :: Bool
 ex03 = (==) 5 6
@@ -29,9 +29,9 @@ ex08 = (+) 5 6
 -- 11
 ex09 = (+) ((+) 5 6) 3
 --14
-ex10 = (mod) 20 5
+ex10 = mod 20 5
 -- 0
-ex11 = (mod) 20 9
+ex11 = mod 20 9
 -- 2
 ex12 = (/=) 4 8
 -- True
@@ -64,7 +64,7 @@ ex21 = (:) 6 [7,8,9]
 -- [6,7,8,9]
 hailstone :: Integer -> Integer
 hailstone n
-  | (==) ((mod) n 2) 0 = (div) n 2
+  | (==) (mod n 2) 0 = div n 2
   | otherwise          = (+) ((*) 3 n) 1
 -- hailstone 19 -> 58
 foo :: Integer -> Integer
@@ -77,13 +77,13 @@ foo n
   | mod n 17 == 2  = -43
   | otherwise      = (+) n 3
 f :: Int -> Int -> Int
-f x y = (+) x y
+f x y = x + y
 ex22 = f 3 4
 -- ex22 -> 7
-ex23 = f ((+) 4 5) 1
+ex23 = f (4 + 5) 1
 -- ex23 -> 10
 f1 :: Int -> Int -> Int -> Int
-f1 x y z = (+) ((+) x y) z
+f1 x y z = (x + y) + z
 ex24 = f1 1 2 3
 ex25 = 2 : 3 : 4 :[]
 ex26 = 3 : (1 : [])
@@ -98,7 +98,7 @@ intListLength (x:xs) = (+) (intListLength xs) 1
 sumEveryTwo :: [Integer] -> [Integer]
 sumEveryTwo []         = []     -- Do nothing to the empty list
 sumEveryTwo (x:[])     = [x]    -- Do nothing to lists with a single element
-sumEveryTwo (x:(y:zs)) = ((+) x y) : sumEveryTwo zs
+sumEveryTwo (x:(y:zs)) = (x + y) : sumEveryTwo zs
 -- sumEveryTwo (hailstoneSeq 19) -> [77,117,66,45,69,39,60,15,24,6,1]
 -- The number of hailstone steps needed to reach 1 from a starting
 -- number.
