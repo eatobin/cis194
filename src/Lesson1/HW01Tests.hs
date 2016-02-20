@@ -2,6 +2,8 @@
 --
 -- Test cases for HW 01
 
+-- ghcid --command="stack repl"
+
 module HW01Tests where
 
 import HW01
