@@ -15,5 +15,8 @@ cabal-version:       >=1.10
 executable lesson1
   hs-source-dirs:      src
   main-is:             Main.hs
+  other-modules:       HW01
+                     , HW01Tests
+                     , Testing
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
